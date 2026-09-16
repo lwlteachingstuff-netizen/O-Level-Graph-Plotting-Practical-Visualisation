@@ -1,0 +1,257 @@
+/* Main Layout Fixed Viewport Constraints */
+html, body {
+  height: 100vh;
+  max-height: 100vh;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+#splitLayoutContainer {
+  height: calc(100vh - 57px);
+  max-height: calc(100vh - 57px);
+  min-height: 0;
+  overflow: hidden;
+}
+
+#leftSidebar {
+  height: 100%;
+  max-height: 100%;
+  min-height: 0;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.sidebar-scroll-wrapper {
+  position: relative;
+  flex: 1 1 0%;
+  min-height: 0;
+  max-height: 100%;
+  overflow: hidden;
+  display: flex;
+}
+
+#sidebarScrollContent {
+  flex: 1 1 0%;
+  min-height: 0;
+  max-height: 100%;
+  overflow-y: auto !important;
+  overflow-x: hidden;
+  touch-action: pan-y;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none; /* Hide default for custom visual slider */
+  -ms-overflow-style: none;
+}
+#sidebarScrollContent::-webkit-scrollbar {
+  display: none; /* Custom slider used instead */
+}
+
+/* Dedicated Visual Scroll Slider Track & Dragger Thumb */
+#customScrollSlider {
+  width: 18px;
+  background: #060a12;
+  border-left: 1px solid #1e293b;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  user-select: none;
+  touch-action: none;
+  flex-shrink: 0;
+  z-index: 30;
+}
+
+.scroll-btn-arrow {
+  width: 18px;
+  height: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #94a3b8;
+  cursor: pointer;
+  background: #090d16;
+  font-size: 9px;
+  transition: all 0.15s ease;
+  user-select: none;
+}
+.scroll-btn-arrow:hover {
+  color: #38bdf8;
+  background: #0f172a;
+}
+.scroll-btn-arrow:active {
+  background: #1e293b;
+  color: #67e8f9;
+}
+
+#customScrollTrack {
+  flex: 1 1 0%;
+  width: 100%;
+  position: relative;
+  cursor: pointer;
+  background: #090d16;
+  min-height: 0;
+}
+
+#customScrollThumb {
+  position: absolute;
+  top: 0;
+  left: 2px;
+  width: 14px;
+  min-height: 36px;
+  border-radius: 7px;
+  background: linear-gradient(180deg, #06b6d4 0%, #0284c7 100%);
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  box-shadow: 0 0 10px rgba(6, 182, 212, 0.6);
+  cursor: grab;
+  transition: background 0.15s ease, box-shadow 0.15s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  touch-action: none;
+  pointer-events: auto;
+}
+#customScrollThumb:hover {
+  background: linear-gradient(180deg, #22d3ee 0%, #0ea5e9 100%);
+  box-shadow: 0 0 16px rgba(34, 211, 238, 0.95);
+  border-color: #ffffff;
+}
+#customScrollThumb:active {
+  cursor: grabbing;
+  background: #38bdf8;
+}
+#customScrollThumb::after {
+  content: '';
+  width: 6px;
+  height: 12px;
+  border-top: 2px solid rgba(255, 255, 255, 0.9);
+  border-bottom: 2px solid rgba(255, 255, 255, 0.9);
+}
+
+button, .navTabBtn, .stepDotBtn, .stepProceedBtn, .topStepNumBtn {
+  cursor: pointer;
+  user-select: none;
+  pointer-events: auto;
+}
+
+button > *, .navTabBtn > *, .stepDotBtn > *, .stepProceedBtn > *, .topStepNumBtn > * {
+  pointer-events: none;
+}
+
+details > summary {
+  list-style: none;
+}
+details > summary::-webkit-details-marker {
+  display: none;
+}
+
+/* Input Focus Ring */
+input:focus, select:focus, textarea:focus {
+  outline: none;
+  border-color: #06b6d4;
+  box-shadow: 0 0 0 1px #06b6d4;
+}
+
+/* 30 cm Acrylic Ruler Styling */
+#virtualRuler {
+  position: absolute;
+  width: 720px; /* 30 cm scaled default */
+  height: 90px;
+  transform-origin: center center;
+  pointer-events: auto;
+  user-select: none;
+  filter: drop-shadow(0 15px 25px rgba(0, 0, 0, 0.45));
+}
+
+.ruler-body {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.70) 0%,
+    rgba(240, 249, 255, 0.50) 25%,
+    rgba(219, 234, 254, 0.40) 75%,
+    rgba(191, 219, 254, 0.60) 100%
+  );
+  border: 1.5px solid rgba(255, 255, 255, 0.85);
+  box-shadow: 
+    inset 0 1px 2px rgba(255, 255, 255, 0.9),
+    inset 0 -1px 3px rgba(30, 58, 138, 0.3),
+    0 8px 32px rgba(0, 0, 0, 0.35);
+  backdrop-filter: blur(4px);
+  position: relative;
+  overflow: visible;
+  border-radius: 4px;
+}
+
+/* Beveled Top Edge of Ruler */
+.ruler-body::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, rgba(255,255,255,0.95), rgba(255,255,255,0.5), rgba(255,255,255,0.95));
+}
+
+/* Ruler SVG */
+#rulerTicksContainer svg {
+  width: 100%;
+  height: 100%;
+}
+
+/* Table number input */
+.point-input {
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  padding: 2px 4px;
+  color: #f8fafc;
+  font-family: 'Fira Code', monospace;
+  font-size: 11px;
+  width: 100%;
+  transition: all 0.15s ease;
+}
+.point-input:hover {
+  border-color: #334155;
+  background: rgba(15, 23, 42, 0.6);
+}
+.point-input:focus {
+  border-color: #06b6d4;
+  background: #020617;
+}
+
+/* KaTeX equations in dark mode */
+.katex {
+  color: #f1f5f9;
+  font-size: 1.05em;
+}
+.katex-display {
+  margin: 0.4em 0 !important;
+}
+
+/* Highlight flashing for active step */
+.step-highlight {
+  box-shadow: 0 0 0 2px #06b6d4, 0 0 20px rgba(6, 182, 212, 0.35);
+  border-color: #06b6d4 !important;
+}
+
+.hidden {
+  display: none !important;
+}
+
+.step-page {
+  animation: fadeInStep 0.2s ease-out;
+}
+
+@keyframes fadeInStep {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
